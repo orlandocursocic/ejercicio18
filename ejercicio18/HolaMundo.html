@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Personas REACT</title>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+
+    <!--<script src="/Scripts/App.js"></script>
+     <script src="/Scripts/index.js"></script>-->
+</head>
+<body>
+    <div id="root">
+    </div>
+</body>
+</html>
+<script src="/Scripts/form.jsx"></script>
+
+<script>
+
+    // A $( document ).ready() block.
+    $(document).ready(function () {
+
+        function GetYRellenaFormulario() {
+            $.get("api/Personas/1", function (data) {                
+                $("#nombre").val(data.Nombre);
+                $("#apellidos").val(data.Apellidos);
+                $("#edad").val(data.Edad);
+            });
+        }
+       // GetYRellenaFormulario();
+
+
+        $("#personalDataForm").submit(function (event) {
+
+            // Stop form from submitting normally
+            event.preventDefault();
+            
+            $.ajax({
+                url: 'api/Entradas',
+                type: 'PUT',
+                data: $('#personalDataForm').serialize(),
+                success: function (result) {             
+                    //$("#root").append("Id: " + response.Id + "</br>").append("Precio: " + response.Precio + "</br>");
+                   // GetYRellenaFormulario();
+                }
+            });
+
+        });
+        
+    });
+
+</script>
+
+
